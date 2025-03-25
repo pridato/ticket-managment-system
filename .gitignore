@@ -1,0 +1,113 @@
+# ===============================
+# Python
+# ===============================
+# Bytecode files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+*.cover
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+*.egg
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+.idea/
+
+# .tox, .nox, .coverage, .hypothesis, .pytest_cache
+.tox/
+.nox/
+.coverage
+*.hypothesis/
+*.pytest_cache/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# ===============================
+# Node.js / Frontend (React)
+# ===============================
+# Dependency directories
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Build directories
+build/
+dist/
+*.log
+
+# Test coverage
+coverage/
+
+# .env files for environment variables
+.env
+.env.*
+
+# Next.js
+.next/
+
+# React Native
+.expo/
+
+# ===============================
+# Docker
+# ===============================
+# Docker files
+docker-compose.override.yml
+docker-compose.local.yml
+
+# ===============================
+# IDE / Editor files
+# ===============================
+# VS Code
+.vscode/
+
+# PyCharm / IntelliJ
+.idea/
+
+# Sublime Text
+*.sublime-workspace
+*.sublime-project
+
+# ===============================
+# Miscellaneous
+# ===============================
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log
+
+# JetBrains IDE
+.idea/
+
+# ===============================
+# Kubernetes
+# ===============================
+# Kubernetes configuration files
+k8s/
+
+# ===============================
+# FastAPI / Backend (Python) Specific
+# ===============================
+# FastAPI example folder
+app/__pycache__/
+app/.env
+app/.env.*
+
+# ===============================
+# Other configuration files
+# ===============================
+# Secrets files
+secrets/
