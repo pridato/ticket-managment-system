@@ -17,10 +17,7 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 def get_db():
     db = SessionLocal()
     try:
-        result = db.execute(text("SELECT 1"))
-        print("✅ Conexión a la base de datos exitosa")
-    except Exception as e:
-        print(f"❌ Error en la conexión a la base de datos: {e}")
+        yield db
     finally:
         db.close()
 
