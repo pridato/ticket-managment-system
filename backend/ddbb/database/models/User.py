@@ -1,6 +1,7 @@
-from sqlalchemy import Column, Integer, String, Boolean
+from sqlalchemy import Column, ForeignKey, Integer, String, Boolean
 from .base import Base
 from sqlalchemy.orm import relationship
+from .Role import Role
 
 
 class User(Base):
@@ -33,7 +34,7 @@ class User(Base):
     is_active = Column(Boolean, default=True)
     full_name = Column(String, nullable=False)
     phone = Column(String, nullable=False)
-    role_id = Column(Integer, nullable=False)
+    role_id = Column(Integer, ForeignKey("roles.id"), nullable=False)
 
     role = relationship("Role", back_populates="users")
     tickets = relationship("Ticket", back_populates="user")

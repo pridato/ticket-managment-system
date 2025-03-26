@@ -18,7 +18,7 @@ class ActivityLog(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     action = Column(String, nullable=False)
-    timestamp = Column(DateTime, default=datetime.utcnow)
-    user_id = Column(Integer, ForeignKey("users.id"), nullable=True)
+    timestamp = Column(DateTime, default=datetime.now)
+    user_id = Column(Integer, ForeignKey('users.id'))
 
     user = relationship("User", back_populates="activity_logs")

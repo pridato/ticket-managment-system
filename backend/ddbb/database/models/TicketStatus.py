@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, DateTime
 from .base import Base
 from datetime import datetime
 from sqlalchemy.orm import relationship
@@ -17,7 +17,7 @@ class TicketStatus(Base):
     """
     __tablename__ = "ticket_statuses"
 
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, unique=True, nullable=False)
+    id = Column(Integer, primary_key=True, index=True, default=0)
+    name = Column(String, unique=True, nullable=False, default="open")
 
     tickets = relationship("Ticket", back_populates="status")

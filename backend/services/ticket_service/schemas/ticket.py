@@ -18,7 +18,8 @@ class TicketCreate(BaseModel):
     """
     title: str
     description: str
-    status: Optional[TicketStatus] = TicketStatus.OPEN
+    status: Optional[int] = 1
+    user_id: int
 
     class Config:
         """

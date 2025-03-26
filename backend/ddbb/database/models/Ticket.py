@@ -30,7 +30,7 @@ class Ticket(Base):
     created_at = Column(DateTime, default=datetime.now)
     updated_at = Column(DateTime, default=datetime.now,
                         onupdate=datetime.now)
-    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=True)
     status_id = Column(Integer, ForeignKey(
         "ticket_statuses.id"), nullable=False)
 
