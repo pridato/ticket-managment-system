@@ -1,7 +1,6 @@
 from sqlalchemy.orm import Session
-from backend.ddbb.database.models.Comment import Comment
-from schemas.comment import CommentCreate, CommentUpdate
-from datetime import datetime
+from ddbb.database.models.Comment import Comment
+from ..schemas.comment import CommentCreate, CommentUpdate
 
 
 def create_comment(db: Session, ticket_id: int, comment: CommentCreate):

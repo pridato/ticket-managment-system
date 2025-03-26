@@ -10,8 +10,7 @@ class CommentCreate(BaseModel):
     created_at: Optional[str] = datetime.now().isoformat()
 
     class Config:
-        # Esto permite que los modelos ORM como SQLAlchemy sean convertidos en modelos Pydantic.
-        orm_mode = True
+        from_attributes = True
 
 
 class CommentUpdate(BaseModel):
@@ -20,4 +19,4 @@ class CommentUpdate(BaseModel):
     created_at: Optional[str] = None
 
     class Config:
-        orm_mode = True
+        from_attributes = True

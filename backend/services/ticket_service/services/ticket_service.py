@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
-from backend.ddbb.database.models.Ticket import Ticket
-from schemas.ticket import TicketCreate, TicketUpdate
-from backend.ddbb.database.models.TicketStatus import TicketStatus
+from ddbb.database.models.Ticket import Ticket
+from ..schemas.ticket import TicketCreate, TicketUpdate
+from ddbb.database.models.TicketStatus import TicketStatus
 
 
 def create_ticket(db: Session, ticket: TicketCreate):

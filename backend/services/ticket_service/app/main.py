@@ -1,10 +1,10 @@
 from fastapi import FastAPI
-from api.ticket import router as ticket_router
-from api.comment import router as comment_router
-from backend.ddbb.database.db_postgres import engine
-from backend.ddbb.database.models.base import Base
-from backend.ddbb.database.models.Ticket import Ticket
-from backend.ddbb.database.models.Comment import Comment
+from services.ticket_service.api.ticket import router as ticket_router
+from services.ticket_service.api.comment import router as comment_router
+from ddbb.database.db_postgres import engine
+from ddbb.database.models.base import Base
+from ddbb.database.models.Ticket import Ticket
+from ddbb.database.models.Comment import Comment
 
 # Crear las tablas en la base de datos (si no existen)
 Base.metadata.create_all(bind=engine)

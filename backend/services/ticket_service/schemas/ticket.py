@@ -24,7 +24,7 @@ class TicketCreate(BaseModel):
         """
         Configuración del modelo.
         """
-        orm_mode = True  # permite usar el modelo con SQLAlchemy
+        from_attributes = True  # permite usar el modelo con SQLAlchemy
 
 
 class TicketUpdate(BaseModel):
@@ -33,4 +33,4 @@ class TicketUpdate(BaseModel):
     status: Optional[TicketStatus]  # El estado también puede actualizarse
 
     class Config:
-        orm_mode = True
+        from_attributes = True
