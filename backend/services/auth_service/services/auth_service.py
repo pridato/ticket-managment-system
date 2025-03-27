@@ -35,6 +35,7 @@ def create_access_token(data: dict, expires_delta: timedelta = timedelta(minutes
                              algorithm=JWT_ALGORITHM)
 
     logger.debug(f"Token created: {encoded_jwt}")
+
     return encoded_jwt
 
 
@@ -99,6 +100,7 @@ def create_user(db: Session, user: UserCreate):
     Returns:
     - User: El usuario creado.
     """
+    logger.info(f"Creating user: {user}")
     db_user = db.query(User).filter(User.email == user.email).first()
     logger.info(f"User found: {db_user} expected None")
     if db_user:

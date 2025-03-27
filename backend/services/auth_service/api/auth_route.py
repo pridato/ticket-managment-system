@@ -1,7 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from typing import Any
-
 from ddbb.database.db_postgres import get_db
 from ..schemas.user import UserCreate, UserLogin
 from ..schemas.token import Token
