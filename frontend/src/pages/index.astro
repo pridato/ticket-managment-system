@@ -1,0 +1,17 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHeader from "../components/common/PageHeader.astro";
+import TicketDashboard from "../components/tickets/TicketDashboard.jsx";
+---
+
+<Layout title="Ticket-manager">
+  <main class="h-screen bg-slate-50 dark:bg-slate-900">
+    <div class="container mx-auto py-8 px-4">
+      <PageHeader
+        title="Sistema de Gestión de Tickets"
+        description="Gestiona y organiza tickets de soporte técnico"
+      />
+      <TicketDashboard client:load />
+    </div>
+  </main>
+</Layout>
