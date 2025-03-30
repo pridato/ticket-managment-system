@@ -27,7 +27,8 @@ export default function TicketColumn({ column, tickets, priorityColors, users })
                         {(provided) => (
                             <div ref={provided.innerRef} {...provided.droppableProps} className="space-y-3 min-h-[400px]">
                                 {column.ticketIds.map((ticketId, index) => {
-                                    const ticket = tickets[ticketId]
+                                    const ticket = tickets.filter(t => t.id === ticketId)[0]
+                                    if (!ticket || ticket === undefined) return
                                     return <TicketCard key={ticket.id} ticket={ticket} index={index} priorityColors={priorityColors} users={users} />
                                 })}
                             </div>

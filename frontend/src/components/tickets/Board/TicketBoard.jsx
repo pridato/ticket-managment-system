@@ -1,5 +1,5 @@
 import { DragDropContext } from "@hello-pangea/dnd"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { initialColumns, ticketsData, users, priorityColors } from "@/constants"
 import TicketColumn from "./TicketColumn"
 
