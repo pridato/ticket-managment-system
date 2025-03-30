@@ -5,14 +5,19 @@ import { toast } from "sonner";
 import { Card } from "../ui/card";
 import TicketList from "./List/TicketList";
 import TicketBoard from "./Board/TicketBoard";
-
+import { Toaster } from "@/components/ui/sonner";
 
 export default function TicketDashboard() {
   const [view, setView] = useState("board");
 
   const handleCreateSuccess = () => {
+    console.log("Ticket creado");
     toast("Ticket creado", {
       description: "Tu ticket ha sido creado exitosamente.",
+      action: {
+        label: "Cancelar",
+        onClick: () => console.log("Undo")
+      }
     });
   };
 
@@ -42,6 +47,7 @@ export default function TicketDashboard() {
           </Card>
         </div>
       </div>
+      <Toaster />
     </div>
   );
 }
