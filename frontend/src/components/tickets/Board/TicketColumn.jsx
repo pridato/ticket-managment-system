@@ -15,7 +15,7 @@ import { Badge } from "@/components/ui/badge"
  */
 export default function TicketColumn({ column, tickets, priorityColors, users }) {
     return (
-        <div key={column.id} className="bg-gray-100 rounded-lg p-4 min-h-[500px]">
+        <div key={column.id} className="dark:bg-slate-800 bg-gray-200 rounded-lg p-4 min-h-[600px]">
             <div className="rounded-lg border bg-card text-card-foreground shadow-sm h-full">
                 <div className="flex flex-col space-y-1.5 p-6 pb-2">
                     <div className="text-md font-medium flex justify-between">
