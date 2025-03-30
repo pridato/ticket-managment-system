@@ -1,12 +1,11 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from typing import Any
 from ddbb.database.db_postgres import get_db
 from ..schemas.user import UserCreate, UserLogin
 from ..schemas.token import Token
-from ..services.auth_service import authenticate_user, create_access_token, create_user, get_password_hash, login_user, forgot_password_s
+from ..services.auth_service import create_user, login_user, forgot_password_s
 from ddbb.database.models.User import User
-from ..services.email_service import send_password_reset_email
 
 
 router = APIRouter()

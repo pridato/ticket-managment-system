@@ -21,6 +21,42 @@ services:
     networks:
       - backend_network
 
+  ticket_service:
+    build:
+      context: ./services/ticket_service
+    container_name: ticket_service
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - backend_network
+
+  auth_service:
+    build:
+      context: ./services/auth_service
+    container_name: auth_service
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8001
+    ports:
+      - "8001:8001"
+    depends_on:
+      - postgres
+    networks:
+      - backend_network
+
+  notification_service:
+    build:
+      context: ./services/notification_service
+    container_name: notification_service
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8002
+    ports:
+      - "8002:8002"
+    depends_on:
+      - redis
+    networks:
+      - backend_network
 volumes:
   postgres_data:
 
