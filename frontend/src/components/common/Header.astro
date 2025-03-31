@@ -5,6 +5,7 @@ interface Props {
 const { title } = Astro.props;
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/common/ModeToggle";
+import AuthButtons from "@/components/common/AuthButton";
 ---
 
 <header class="bg-white dark:bg-slate-800 shadow-md py-4 transition-colors duration-300 fixed top-0 left-0 w-full z-50">
@@ -14,8 +15,7 @@ import { ModeToggle } from "@/components/common/ModeToggle";
 
     <!-- Login/Register Buttons -->
     <div class="space-x-4">
-      <Button className="bg-emerald-700 hover:bg-emerald-900 text-white cursor-pointer ">Login</Button>
-      <Button className="text-emerald-700 dark:text-emerald-400 bg-gray-200 hover:bg-gray-300 cursor-pointer">Register</Button>
+      <AuthButtons client:load/>
       <ModeToggle client:load />
     </div>
   </div>
