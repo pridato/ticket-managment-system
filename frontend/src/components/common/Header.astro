@@ -1,0 +1,23 @@
+---
+interface Props {
+  title: string;
+}
+const { title } = Astro.props;
+import { Button } from "@/components/ui/button";
+import { ModeToggle } from "@/components/common/ModeToggle";
+---
+
+<header class="bg-white dark:bg-slate-800 shadow-md py-4 transition-colors duration-300 fixed top-0 left-0 w-full z-50">
+  <div class="container mx-auto flex justify-between items-center px-4">
+    <!-- Logo -->
+    <h1 class="text-lg font-bold text-gray-900 dark:text-white">{title}</h1>
+
+    <!-- Login/Register Buttons -->
+    <div class="space-x-4">
+      <Button className="bg-emerald-700 hover:bg-emerald-900 text-white cursor-pointer ">Login</Button>
+      <Button className="text-emerald-700 dark:text-emerald-400 bg-gray-200 hover:bg-gray-300 cursor-pointer">Register</Button>
+      <ModeToggle client:load />
+    </div>
+  </div>
+</header>
+
