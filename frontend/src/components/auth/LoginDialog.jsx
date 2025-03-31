@@ -5,6 +5,9 @@ import { Input } from "../ui/input"
 import { MailIcon, LockIcon } from "lucide-react"
 import { useState } from "react"
 import { Button } from "../ui/button"
+import { authService } from "@/services"
+import { toast } from "sonner";
+import { Toaster } from "@/components/ui/sonner";
 
 /**
  * Componente de diálogo para iniciar sesión.
@@ -47,14 +50,27 @@ export default function LoginDialog({ isOpen, onOpenChange, onRegisterOpen }) {
         setIsLoading(true)
 
         try {
-            await new Promise((resolve) => setTimeout(resolve, 1000))
+            const response = await authService.login(email, password)
 
-            toast.success("Inicio de sesión exitoso")
+            if (response.status !== 200) {
+                throw new Error("Error en la respuesta del servidor")
+                
+            }
+            
+            toast.success("Inicio de sesión exitoso", {
+                description: "Bienvenido de nuevo",
+                action: {
+                    label: "Ver tickets",
+                    onClick: () => console.log("Tickets")
+                }
+            });
             onOpenChange(false)
             setEmail("")
             setPassword("")
         } catch (error) {
-            toast.error("Error al iniciar sesión")
+            toast.error("Error al iniciar sesión", {
+                description: "Credenciales incorrectas",
+            })
         } finally {
             setIsLoading(false)
         }
@@ -73,6 +89,7 @@ export default function LoginDialog({ isOpen, onOpenChange, onRegisterOpen }) {
 
     return (
         <Dialog open={isOpen} onOpenChange={onOpenChange}>
+            
             <DialogContent className="sm:max-w-[425px]">
                 {/* Header */}
                 <DialogHeader>

@@ -43,7 +43,7 @@ export default function TicketDashboard() {
           </div>
 
         </div>
-        <Toaster />
+        <Toaster richColors/>
       </div>
     </main>
 
