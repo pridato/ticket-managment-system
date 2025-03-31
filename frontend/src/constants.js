@@ -148,3 +148,5 @@ export const initialColumns = {
     ticketIds: ["ticket-7", "ticket-8"],
   },
 };
+
+const API_URL = import.meta.env.PUBLIC_API_URL || "http://localhost:3000/api"
