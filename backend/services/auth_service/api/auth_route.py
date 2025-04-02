@@ -1,6 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from typing import Any
 from ddbb.database.db_postgres import get_db
 from ..schemas.user import UserCreate, UserLogin
 from ..schemas.token import Token
@@ -9,6 +8,7 @@ from ddbb.database.models.User import User
 
 
 router = APIRouter()
+
 
 
 @router.post("/register", response_model=Token)

@@ -1,10 +1,10 @@
-import { API_URL } from "@/constants"
+import { API_URL } from "@/constants";
+import axios from "axios";
 
 /**
  * Cliente API base para realizar peticiones HTTP
  * Configura headers comunes, manejo de errores y tokens de autenticación
  */
-
 
 /**
  * Obtiene el token de autenticación almacenado en el localStorage.
@@ -13,11 +13,10 @@ import { API_URL } from "@/constants"
  */
 const getAuthToken = () => {
   if (typeof localStorage !== "undefined") {
-    return localStorage.getItem("auth_token")
+    return localStorage.getItem("auth_token");
   }
-  return null
-}
-
+  return null;
+};
 
 /**
  * Genera los encabezados HTTP para una solicitud, incluyendo encabezados personalizados
@@ -30,16 +29,15 @@ const getHeaders = (customHeaders = {}) => {
   const headers = {
     "Content-Type": "application/json",
     ...customHeaders,
-  }
+  };
 
-  const token = getAuthToken()
+  const token = getAuthToken();
   if (token) {
-    headers["Authorization"] = `Bearer ${token}`
+    headers["Authorization"] = `Bearer ${token}`;
   }
 
-  return headers
-}
-
+  return headers;
+};
 
 /**
  * Maneja la respuesta de una solicitud HTTP, procesando el cuerpo JSON y gestionando errores.
@@ -55,15 +53,15 @@ const getHeaders = (customHeaders = {}) => {
  * @returns {Promise<Object>} Devuelve una promesa que resuelve con los datos JSON de la respuesta si es exitosa.
  */
 const handleResponse = async (response) => {
-  const data = await response.json().catch(() => ({}))
+  const data = await response.json().catch(() => ({}));
 
   if (!response.ok) {
     // Manejo específico de errores según el código de estado
     if (response.status === 401) {
       // Token expirado o inválido
-      localStorage.removeItem("auth_token")
+      localStorage.removeItem("auth_token");
       // Redirigir a login o mostrar mensaje
-      window.location.href = "/login"
+      window.location.href = "/login";
     }
 
     throw {
@@ -71,11 +69,11 @@ const handleResponse = async (response) => {
       message: data.message || response.statusText,
       errors: data.errors,
       data,
-    }
+    };
   }
 
-  return data
-}
+  return data;
+};
 
 /**
  * Cliente HTTP para realizar peticiones a la API
@@ -87,14 +85,14 @@ const apiClient = {
    * @param {Object} options - Opciones adicionales para fetch
    */
   async get(endpoint, options = {}) {
-    const url = `${API_URL}${endpoint}`
+    const url = `${API_URL}${endpoint}`;
     const response = await fetch(url, {
       method: "GET",
       headers: getHeaders(options.headers),
       ...options,
-    })
+    });
 
-    return handleResponse(response)
+    return handleResponse(response);
   },
 
   /**
@@ -104,15 +102,27 @@ const apiClient = {
    * @param {Object} options - Opciones adicionales para fetch
    */
   async post(endpoint, data, options = {}) {
-    const url = `${API_URL}${endpoint}`
-    const response = await fetch(url, {
-      method: "POST",
-      headers: getHeaders(options.headers),
-      body: JSON.stringify(data),
-      ...options,
-    })
+    const url = `${API_URL}${endpoint}`;
 
-    return handleResponse(response)
+    try {
+      const response = await axios.post(url, data, {
+        headers: getHeaders(options.headers),
+        ...options,
+      });
+      return handleResponse(response);
+    } catch (error) {
+      if (error.response) {
+        // La solicitud se realizó y el servidor respondió con un código de estado
+        // que cae fuera del rango de 2xx
+        const { status, data } = error.response;
+        throw {
+          status,
+          message: data.message || error.message,
+          errors: data.errors,
+          data,
+        };
+      }
+    }
   },
 
   /**
@@ -122,15 +132,15 @@ const apiClient = {
    * @param {Object} options - Opciones adicionales para fetch
    */
   async put(endpoint, data, options = {}) {
-    const url = `${API_URL}${endpoint}`
+    const url = `${API_URL}${endpoint}`;
     const response = await fetch(url, {
       method: "PUT",
       headers: getHeaders(options.headers),
       body: JSON.stringify(data),
       ...options,
-    })
+    });
 
-    return handleResponse(response)
+    return handleResponse(response);
   },
 
   /**
@@ -140,15 +150,15 @@ const apiClient = {
    * @param {Object} options - Opciones adicionales para fetch
    */
   async patch(endpoint, data, options = {}) {
-    const url = `${API_URL}${endpoint}`
+    const url = `${API_URL}${endpoint}`;
     const response = await fetch(url, {
       method: "PATCH",
       headers: getHeaders(options.headers),
       body: JSON.stringify(data),
       ...options,
-    })
+    });
 
-    return handleResponse(response)
+    return handleResponse(response);
   },
 
   /**
@@ -157,14 +167,14 @@ const apiClient = {
    * @param {Object} options - Opciones adicionales para fetch
    */
   async delete(endpoint, options = {}) {
-    const url = `${API_URL}${endpoint}`
+    const url = `${API_URL}${endpoint}`;
     const response = await fetch(url, {
       method: "DELETE",
       headers: getHeaders(options.headers),
       ...options,
-    })
+    });
 
-    return handleResponse(response)
+    return handleResponse(response);
   },
 
   /**
@@ -174,10 +184,10 @@ const apiClient = {
    * @param {Object} options - Opciones adicionales para fetch
    */
   async upload(endpoint, formData, options = {}) {
-    const url = `${API_URL}${endpoint}`
+    const url = `${API_URL}${endpoint}`;
     // No incluimos Content-Type para que el navegador establezca el boundary correcto
-    const headers = getHeaders()
-    delete headers["Content-Type"]
+    const headers = getHeaders();
+    delete headers["Content-Type"];
 
     const response = await fetch(url, {
       method: "POST",
@@ -187,10 +197,10 @@ const apiClient = {
       },
       body: formData,
       ...options,
-    })
+    });
 
-    return handleResponse(response)
+    return handleResponse(response);
   },
-}
+};
 
-export default apiClient
+export default apiClient;

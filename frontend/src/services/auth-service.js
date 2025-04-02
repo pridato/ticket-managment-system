@@ -1,4 +1,4 @@
-import apiClient from "./api-client";
+import apiClient from "./api-client"
 
 /**
  * Servicio de autenticación para gestionar el inicio de sesión, registro, 
@@ -25,7 +25,11 @@ const authService = {
    */
   async login(email, password) {
     try {
-      const response = await apiClient.post("/auth/login", { email, password });
+      const response = await apiClient.post("/auth/login", { email, password }, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       // Guardar token en localStorage si existe junto con el usuario
       if (response.token) {
